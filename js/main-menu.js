@@ -1,4 +1,4 @@
-// mathris game logic goes here
+// timjs game logic goes here
 var mainMenu = {
 
 
@@ -27,7 +27,7 @@ var mainMenu = {
     },
 
     startGame: function() {
-        e.changeScenario(mathris);
+        e.changeScenario(timjs);
     },
 
     // runned each tick after input callbacks are done
@@ -39,10 +39,8 @@ var mainMenu = {
     draw: function(ctx) {
         e.clearScreen();
         // put the background in place
-        ctx.drawImage(a('background.jpg'), 0, 0, e.width, e.height);
+        ctx.drawImage(a('bg.png'), 0, 0, e.width, e.height);
         // put the logo
-        var logo = a('logo.png');
-        ctx.drawImage(logo, h.centerCoord(logo.width, e.width), 30);
 
         ctx.fillStyle = '#333333';
         ctx.font = '22pt Arial';

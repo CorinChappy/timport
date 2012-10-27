@@ -5,6 +5,9 @@ var timjs = {
     // 
     // all the callbacks specified here will be called as the first action
     // at the beggining of each game tick in the order they were fired
+    rows: 10,
+    columns: 20,
+
     bindings: {
         keydown: new Array(50),
         keyup: new Array(50)
@@ -29,40 +32,17 @@ var timjs = {
 
     // runned each tick after update is done
     draw: function(ctx) {
+        e.clearScreen();
         // put the background in place
-        ctx.drawImage(a('background.jpg'), 0, 0, e.width, e.height);
+        ctx.drawImage(a('bg.png'), 0, 0, e.width, e.height);
         // console.log("this may draw");
     },
 
-    // definition of the input callbacks used in bindings:
-    speedUp: function() {
-        console.log("now the speed of the curren brick should be bigger");
-    },
-
-    endSpeedUp: function() {
-        console.log("return to normal falling speed when key is released");
-    },
-
-    moveRight: function() {
-        console.log("move the brick right if there is enough room");
-    },
-
-    moveLeft: function() {
-        console.log("move the brick left if there is enough room");
-    },
-
-    // game logic comes here:
-
-    currentBrick: null,
-    score: 0,
-    columns: 5,
-    rows: 10,
-
     calcWidth: function() {
-        return (timjs.columns * 66) + 4; // 2 px left alone on right, 2px left alone on right - looks cooler
+        return (timjs.columns * 40);
     },
     
     calcHeight: function() {
-        return (timjs.rows * 40) + 40;  // we left 40 pixels to render score and other interesting stuff
+        return (timjs.rows * 40);
     }
 }
