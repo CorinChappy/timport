@@ -86,8 +86,143 @@
 
         <script type="text/javascript" src="js/init.js"></script>
 
+
+	<script type="text/javascript">
+		window.onload = function(){colourSwap();movingLike.go();}
+
+
+
+		var movingLike = new function(){
+			var boundry = {"x":1100,"y":100};
+			var direction = {"x":1,"y":1}
+			var e;
+			var likes = new Array();
+
+			var smallLike = function(){
+				var newl = document.createElement("div");
+			
+				newl.innerHTML = "<iframe src=\"//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fusers.ecs.soton.ac.uk%2Fcdc1g12%2Fsuper_sizzling_sams_sexy_site%2F&amp;send=false&amp;layout=standard&amp;width=10&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=tahoma&amp;height=80&amp;appId=39660167140\" scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden; width:250px; height:30px;\" allowTransparency=\"true\"></iframe>";
+				newl.style.backgroundColor = "white";
+				newl.style.position = "absolute";
+				newl.style.left = "550px";
+				newl.style.bottom = "50px";
+				newl.num = Math.floor(Math.random()*4);
+
+				newl.move = function(){
+					if(this.num == 0){
+						this.style.left = (parseInt(this.style.left)+1)+"px";
+						this.style.bottom = (parseInt(this.style.bottom)+1)+"px";						
+					}
+					if(this.num == 1){
+						this.style.left = (parseInt(this.style.left)-1)+"px";
+						this.style.bottom = (parseInt(this.style.bottom)+1)+"px";						
+					}
+					if(this.num == 2){
+						this.style.bottom = (parseInt(this.style.bottom)+1)+"px";						
+					}
+					if(this.num == 3){
+						this.style.left = (parseInt(this.style.left)-1)+"px";						
+					}
+					if(this.num == 4){
+						this.style.left = (parseInt(this.style.left)+1)+"px";						
+					}
+					
+					
+
+				}
+
+
+				return newl;
+			}
+
+			var thrown = {"left":1,"right":0};
+			
+
+			this.go = function(){
+				e = document.getElementById("likeMover").style;
+				e.left = "3px";
+				e.bottom = "5px";
+				setInterval(move,1);
+			}
+
+			function move(){
+				if(direction.x){
+					e.left = (parseInt(e.left)+1)+"px";
+					
+				}else{
+					e.left = (parseInt(e.left)-1)+"px";
+				}
+
+				if(direction.y){
+					e.bottom = (parseInt(e.bottom)+1)+"px";
+					
+				}else{
+					e.bottom = (parseInt(e.bottom)-1)+"px";
+				}
+
+
+				if((thrown.right != 1 && parseInt(e.left) > (boundry.x/2)) || (thrown.left != 1 && parseInt(e.left) < (boundry.x/2))){
+				if(likes[1]){
+					document.body.removeChild(likes[0]);
+					document.body.removeChild(likes[1]);
+					document.body.removeChild(likes[2]);
+					
+				}
+				
+				likes[0] = new smallLike();
+				likes[1] = new smallLike();
+				likes[2] = new smallLike();
+
+				document.body.appendChild(likes[0]);
+				document.body.appendChild(likes[1]);
+				document.body.appendChild(likes[2]);
+
+				setInterval(function(){likes[0].move()},10);
+				setInterval(function(){likes[1].move()},10);
+				setInterval(function(){likes[2].move()},10);
+
+				if(thrown.right == 1){thrown.right = 0;thrown.left = 1;}else{thrown.right = 1;thrown.left = 0;}
+
+				}
+
+
+				if(parseInt(e.left) > boundry.x){direction.x = 0; thrown.left = 0;}
+				if(parseInt(e.left) < 3){direction.x = 1; thrown.right = 0;}
+
+				if(parseInt(e.bottom) > boundry.y){direction.y = 0;}
+				if(parseInt(e.bottom) < 5){direction.y = 1;}
+			
+			}
+
+			console.log("ROFLOL");
+		}
+
+
+
+		function colourSwap(){
+			var b = document.body.style;
+			b.backgroundColor = "yellow";
+			b.color = "green";
+			 window.setInterval(function(){
+				if(b.backgroundColor=="yellow"){
+					b.backgroundColor = "blue";
+					b.color = "pink";
+				}else{
+					b.backgroundColor = "yellow";
+					b.color = "green";
+				}	
+			
+			},500);
+		};
+	</script>
+
 	</head>
 	<body>
 		<canvas id="game"></canvas>
+
+<div id="likeMover" style="position:fixed; left:3px; bottom:5px; text-align:center">
+	<img src="elephant.png" style="width:80px;"><br>
+	<div style="background-color:white;"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fusers.ecs.soton.ac.uk%2Fcdc1g12%2Fsuper_sizzling_sams_sexy_site%2F&amp;send=false&amp;layout=standard&amp;width=10&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=tahoma&amp;height=80&amp;appId=39660167140" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:30px;" allowTransparency="true"></iframe></div>
+</div>
 	</body>
 </html>
