@@ -62,10 +62,10 @@ var e = {
 
     // call all the input callbacks required by the scene
     inputCallbacks: function() {
-        for (var i in e.inputBuffer) {
-            e.inputBuffer[i]();
-        }
-        e.inputBuffer = new Array();
+        // for (var i in e.inputBuffer) {
+        //     e.inputBuffer[i]();
+        // }
+        // e.inputBuffer = new Array();
     },
 
     // listen to inputs required by  the scene, buffet them and prevent their default actions
